@@ -4,6 +4,7 @@
     align-items: center;
     position: relative;
     border-radius: .25rem;
+    margin-bottom: 10px;
     background-color: rgb(236, 236, 236);
     box-shadow: 0 0 5px 2px rgba(0,0,0,.3);
     transform-style: preserve-3d;

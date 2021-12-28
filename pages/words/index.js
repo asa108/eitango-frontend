@@ -7,7 +7,7 @@ export default function HomePage({ words }) {
 
   return (
     <Layout>
-      <h1>Home Top</h1>
+      <h1>Flashcard</h1>
       {words.length === 0 && <h1>Not Words</h1>}
       <FlashcardList words={words} />
     </Layout>
