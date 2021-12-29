@@ -89,7 +89,6 @@ export default function EditWordPage({ wd }) {
 export async function getServerSideProps({ params: { id }, req }) {
   const res = await fetch(`${API_URL}/words/${id}`);
   const wd = await res.json();
-  console.log(req.headers.cookie);
 
   return {
     props: {

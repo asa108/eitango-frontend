@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(data.user);
-      router.push("/account/dashbord");
+      router.push("/");
     } else {
       setUser(null);
     }

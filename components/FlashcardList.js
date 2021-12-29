@@ -20,7 +20,6 @@ export default function FlashcardList({ words }) {
       setDisable(true);
     } else {
       setIdx(idx + 1);
-      console.log(idx);
     }
   };
 
@@ -29,7 +28,6 @@ export default function FlashcardList({ words }) {
       setDisable(true);
     } else {
       setIdx(idx - 1);
-      console.log(idx);
     }
   };
 

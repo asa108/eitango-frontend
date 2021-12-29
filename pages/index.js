@@ -18,7 +18,6 @@ export default function HomePage({ words }) {
 export async function getStaticProps() {
   const res = await fetch(`${API_URL}/words`);
   const words = await res.json();
-  console.log(words);
   return {
     props: { words, revalicate: 1 },
   };

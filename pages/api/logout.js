@@ -1,7 +1,7 @@
 import { API_URL } from "@/config/index";
 import cookie from "cookie";
 
-export default async (req, res) => {
+export default async function Logout(req, res) {
   if (req.method === "POST") {
     // Destroy cookie
     res.setHeader(
@@ -9,7 +9,7 @@ export default async (req, res) => {
       cookie.serialize("token", "", {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
-        maxAge: new Date(0), // 1 week
+        expires: new Date(0),
         sameSite: "strict",
         path: "/",
       })
@@ -18,6 +18,6 @@ export default async (req, res) => {
     res.status(200).json({ message: "Success" });
   } else {
     res.setHeader("Allow", ["POST"]);
-    res.status(405).json({ massage: `Methods ${req.method} is not allowed` });
+    res.status(405).json({ message: `Method ${req.method} not allowed` });
   }
 };

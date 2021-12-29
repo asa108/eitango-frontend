@@ -50,8 +50,6 @@ export default function AllWordsPage() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("name", name);
-    console.log("value", value);
     setValues({ ...values, [name]: value });
   };
   return (

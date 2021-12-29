@@ -1,9 +1,10 @@
 import { API_URL } from "@/config/index";
 import cookie from "cookie";
 
-export default async (req, res) => {
+export default async function Register(req, res) {
   if (req.method === "POST") {
     const { username, email, password } = req.body;
+
     const strapiRes = await fetch(`${API_URL}/auth/local/register`, {
       method: "POST",
       headers: {
@@ -17,9 +18,9 @@ export default async (req, res) => {
     });
 
     const data = await strapiRes.json();
-    console.log(data.jwt);
+
     if (strapiRes.ok) {
-      // set cookie
+      // Set Cookie
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("token", data.jwt, {
@@ -39,6 +40,6 @@ export default async (req, res) => {
     }
   } else {
     res.setHeader("Allow", ["POST"]);
-    res.status(405).json({ massage: `Methods ${req.method} is not allowed` });
+    res.status(405).json({ message: `Method ${req.method} not allowed` });
   }
 };
