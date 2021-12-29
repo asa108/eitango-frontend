@@ -1,18 +1,13 @@
 import { useState } from "react";
 import styles from "@/styles/Flascard.module.css";
 import Link from "next/link";
-import {
-  FaPencilAlt,
-  FaTrashAlt,
-  FaChevronRight,
-  FaChevronLeft,
-} from "react-icons/fa";
+import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { API_URL } from "@/config/index";
 
-export default function Flashcard({ word, totalWords }) {
+export default function Flashcard({ word }) {
   const router = useRouter();
   const [flip, setFlip] = useState(false);
   const handleFlip = () => {
@@ -35,12 +30,6 @@ export default function Flashcard({ word, totalWords }) {
     // }
   };
 
-  const next = () => {
-    console.log("word", word.id);
-    const id = word.id;
-    // word.slice(0, id + 1);
-  };
-
   return (
     <div>
       <div
@@ -50,20 +39,20 @@ export default function Flashcard({ word, totalWords }) {
         <div className={styles.front}>{word.english}</div>
         <div className={styles.back}>{word.japanese}</div>
       </div>
-      <Link href={`/edit/${word.id}`}>
-        <a className={styles.edit}>
-          <FaPencilAlt />
+      <div className={styles.icons}>
+        <Link href={`/edit/${word.id}`}>
+          <a className={styles.edit}>
+            <FaPencilAlt />
+          </a>
+        </Link>
+        <a
+          href="#"
+          className={styles.delete}
+          onClick={() => handleDelete(word.id)}
+        >
+          <FaTrashAlt />
         </a>
-      </Link>
-      <a
-        href="#"
-        className={styles.delete}
-        onClick={() => handleDelete(word.id)}
-      >
-        <FaTrashAlt />
-      </a>
-      <FaChevronLeft /> 3 / {totalWords}
-      <FaChevronRight onClick={next} />
+      </div>
     </div>
   );
 }

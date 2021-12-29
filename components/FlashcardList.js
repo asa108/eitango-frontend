@@ -1,34 +1,71 @@
 import { useEffect, useState } from "react";
 import Flashcard from "./Flashcard";
-import {
-  FaPencilAlt,
-  FaTrashAlt,
-  FaChevronRight,
-  FaChevronLeft,
-} from "react-icons/fa";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import styles from "@/styles/FlashcardList.module.css";
 
 export default function FlashcardList({ words }) {
-  // const def1 = -1;
-  // const def2 = 0;
-  // let wd = words.slice(def1, def2);
-
-  // const next = (e) => {
-  //   let wd = words.slice(def1 + 1, def2 + 1);
-  // };
+  const [idx, setIdx] = useState(0);
+  const [leftDisable, setLeftDisable] = useState(false);
+  const [rightDisable, setRightDisable] = useState(false);
 
   const totalWords = words.length;
+  let wd = words[idx];
+
+  useEffect(() => {
+    checkIndex();
+  });
+
+  const next = () => {
+    if (idx + 1 === totalWords) {
+      setDisable(true);
+    } else {
+      setIdx(idx + 1);
+      console.log(idx);
+    }
+  };
+
+  const back = () => {
+    if (idx === 0) {
+      setDisable(true);
+    } else {
+      setIdx(idx - 1);
+      console.log(idx);
+    }
+  };
+
+  const checkIndex = () => {
+    if (idx === 0) {
+      setLeftDisable(true);
+    } else if (idx + 1 === totalWords) {
+      setRightDisable(true);
+    } else {
+      setRightDisable(false);
+      setLeftDisable(false);
+    }
+  };
+
   return (
-    <div>
-      <div>
-        {words.map((word) => {
-          return (
-            <Flashcard word={word} key={word.id} totalWords={totalWords} />
-          );
-        })}
+    <div className={styles.container}>
+      <Flashcard word={wd} key={wd.id} />
+      <div className={styles.icons}>
+        <FaChevronLeft
+          className={`${styles.arrow} ${
+            leftDisable ? `${styles.disable}` : ""
+          }`}
+          onClick={back}
+        />
+        <span>
+          {idx + 1} / {totalWords}
+        </span>
+        <FaChevronRight
+          className={`${styles.arrow} ${
+            rightDisable ? `${styles.disable}` : ""
+          }`}
+          onClick={next}
+        />
       </div>
     </div>
   );
 }
 
-// <FaChevronLeft />
-// <FaChevronRight />
+

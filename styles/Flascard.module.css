@@ -28,8 +28,18 @@
     position: absolute;
     padding: 1rem;
     backface-visibility: hidden;
+    font-size: 20px;
 }
 
 .card .back{
     transform: rotateY(180deg);
+}
+
+.icons{
+    text-align: right;
+    
+}
+
+.icons .edit{
+    margin: 0 20px;
 }
