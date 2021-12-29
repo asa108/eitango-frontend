@@ -1,7 +1,12 @@
 import { useState } from "react";
 import styles from "@/styles/Flascard.module.css";
 import Link from "next/link";
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import {
+  FaPencilAlt,
+  FaTrashAlt,
+  FaChevronRight,
+  FaChevronLeft,
+} from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
@@ -30,6 +35,12 @@ export default function Flashcard({ word }) {
     // }
   };
 
+  const next = () => {
+    console.log("word", word.id);
+    const id = word.id;
+    // word.slice(0, id + 1);
+  };
+
   return (
     <div>
       <div
@@ -51,6 +62,8 @@ export default function Flashcard({ word }) {
       >
         <FaTrashAlt />
       </a>
+      <FaChevronLeft />
+      <FaChevronRight onClick={next} />
     </div>
   );
 }

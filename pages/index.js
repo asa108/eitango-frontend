@@ -7,7 +7,7 @@ export default function HomePage({ words }) {
 
   return (
     <Layout>
-      <h1>Home Top</h1>
+      <h1>Home</h1>
       {words.length === 0 && <h1>Not Words</h1>}
       <FlashcardList words={words} />
     </Layout>
@@ -23,3 +23,5 @@ export async function getStaticProps() {
     props: { words, revalicate: 1 },
   };
 }
+
+// words: words.slice(0, 1);
