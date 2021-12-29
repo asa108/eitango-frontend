@@ -1,3 +1,4 @@
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import Link from "next/link";
 import styles from "@/styles/Header.module.css";
 
@@ -13,8 +14,11 @@ export default function Header() {
       <nav>
         <ul>
           <li>
-            <Link href="/login">
-              <a>Login</a>
+            <Link href="/account/login">
+              <a className={styles.login}>
+                <FaSignInAlt />
+                Login
+              </a>
             </Link>
           </li>
         </ul>
