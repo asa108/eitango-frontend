@@ -15,8 +15,24 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // regstor user
-  const registor = async (user) => {
-    console.log(user);
+  const register = async (user) => {
+    const res = await fetch(`${NEXT_URL}/api/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setUser(data.user);
+      router.push("/");
+    } else {
+      setError(data.message);
+      setError(null);
+    }
   };
 
   // login user
@@ -36,6 +52,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(data.user);
+      router.push("/");
     } else {
       setError(data.message);
       setError(null);
@@ -44,7 +61,14 @@ export const AuthProvider = ({ children }) => {
 
   // logout user
   const logout = async (user) => {
-    console.log("logout");
+    const res = await fetch(`${NEXT_URL}/api/logout`, {
+      method: "POST",
+    });
+
+    if (res.ok) {
+      setUser(null);
+      router.push("/");
+    }
   };
 
   // check if user is logged in
@@ -62,7 +86,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, error, registor, login, logout, checkUserLoggedIn }}
+      value={{ user, error, register, login, logout, checkUserLoggedIn }}
     >
       {children}
     </AuthContext.Provider>

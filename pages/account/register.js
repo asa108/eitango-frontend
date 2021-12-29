@@ -7,30 +7,34 @@ import Layout from "@/components/Layout";
 import styles from "@/styles/AuthForm.module.css";
 import AuthContext from "@/context/AuthContext";
 
-export default function RegistorPage() {
+export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const { registor, error } = useContext(AuthContext);
+  const { register, error } = useContext(AuthContext);
+
+  useEffect(() => {
+    error && toast.error(error);
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (password !== passwordConfirm) {
-      toast.error("Password dont't match");
+      toast.error("Password don't match");
       return;
     }
-    registor({ email, password, username });
+    register({ email, password, username });
   };
 
   return (
-    <Layout title="User Registoration">
+    <Layout title="User Registeration">
       <div className={styles.auth}>
         <h1>
           <FaUser />
-          Registor
+          Register
         </h1>
         <ToastContainer />
 
@@ -74,7 +78,7 @@ export default function RegistorPage() {
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
           </div>
-          <input type="submit" value="Login" />
+          <input type="submit" value="Register" />
         </form>
         <p>
           Already have an account?

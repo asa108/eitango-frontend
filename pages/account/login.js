@@ -55,7 +55,7 @@ export default function LoginPage() {
         </form>
         <p>
           Don&apos;t have an account?
-          <Link href="/account/registor">Registor</Link>
+          <Link href="/account/register">Register</Link>
         </p>
       </div>
     </Layout>
