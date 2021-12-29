@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { API_URL } from "@/config/index";
 
-export default function Flashcard({ word }) {
+export default function Flashcard({ word, totalWords }) {
   const router = useRouter();
   const [flip, setFlip] = useState(false);
   const handleFlip = () => {
@@ -62,7 +62,7 @@ export default function Flashcard({ word }) {
       >
         <FaTrashAlt />
       </a>
-      <FaChevronLeft />
+      <FaChevronLeft /> 3 / {totalWords}
       <FaChevronRight onClick={next} />
     </div>
   );
