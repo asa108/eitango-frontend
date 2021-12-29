@@ -8,7 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function EditWordPage({ wd }) {
-  console.log("wd", wd);
   const [values, setValues] = useState({
     english: wd.english,
     japanese: wd.japanese,
@@ -49,8 +48,6 @@ export default function EditWordPage({ wd }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("name", name);
-    console.log("value", value);
     setValues({ ...values, [name]: value });
   };
   return (
@@ -89,9 +86,10 @@ export default function EditWordPage({ wd }) {
   );
 }
 
-export async function getServerSideProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id }, req }) {
   const res = await fetch(`${API_URL}/words/${id}`);
   const wd = await res.json();
+  console.log(req.headers.cookie);
 
   return {
     props: {
