@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import FlashcardList from "@/components/FlashcardList";
 
-export default function HomePage({ words }) {
+export default function WordsPage({ words }) {
   console.log(words);
 
   return (

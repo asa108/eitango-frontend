@@ -34,8 +34,10 @@ export default function FlashcardList({ words }) {
   const checkIndex = () => {
     if (idx === 0) {
       setLeftDisable(true);
+      setRightDisable(false);
     } else if (idx + 1 === totalWords) {
       setRightDisable(true);
+      setLeftDisable(false);
     } else {
       setRightDisable(false);
       setLeftDisable(false);
