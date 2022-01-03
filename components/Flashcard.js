@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styles from "@/styles/Flascard.module.css";
 import Link from "next/link";
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
-import { ToastContainer, toast } from "react-toastify";
+import { FaPencilAlt, FaTrashAlt, FaRegCheckSquare } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { API_URL } from "@/config/index";
@@ -40,6 +39,10 @@ export default function Flashcard({ word }) {
         <div className={styles.back}>{word.japanese}</div>
       </div>
       <div className={styles.icons}>
+        <FaRegCheckSquare />
+        <FaRegCheckSquare />
+        <FaRegCheckSquare />
+
         <Link href={`/edit/${word.id}`}>
           <a className={styles.edit}>
             <FaPencilAlt />

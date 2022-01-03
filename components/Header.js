@@ -17,12 +17,12 @@ export default function Header() {
       <nav>
         <ul>
           {user ? (
-            <div>
+            <div className="btn">
               <li>
-                <button className={styles.logout} onClick={() => logout()}>
+                <div className={styles.logout} onClick={() => logout()}>
                   <FaSignOutAlt />
                   Logout
-                </button>
+                </div>
               </li>
             </div>
           ) : (
