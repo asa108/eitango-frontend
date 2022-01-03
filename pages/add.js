@@ -1,3 +1,4 @@
+import { parseCookies } from "@/helpers/index";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -8,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { async } from "regenerator-runtime";
 
-export default function AddWordPage() {
+export default function AddWordPage({ token }) {
   const [values, setValues] = useState({
     english: "",
     japanese: "",
@@ -35,11 +36,17 @@ export default function AddWordPage() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(values),
     });
 
     if (!res.ok) {
+      if (res.status === 403 || res.status === 401) {
+        toast.error("No token included");
+        return;
+      }
+
       toast.error("Something went wrong");
     } else {
       const data = await res.json();
@@ -86,4 +93,14 @@ export default function AddWordPage() {
       </form>
     </Layout>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const { token } = parseCookies(req);
+
+  return {
+    props: {
+      token,
+    },
+  };
 }
