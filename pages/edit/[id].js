@@ -1,3 +1,4 @@
+import { parseCookies } from "@/helpers/index";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import styles from "@/styles/Form.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function EditWordPage({ wd }) {
+export default function EditWordPage({ wd, token }) {
   const [values, setValues] = useState({
     english: wd.english,
     japanese: wd.japanese,
@@ -33,11 +34,16 @@ export default function EditWordPage({ wd }) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(values),
     });
 
     if (!res.ok) {
+      if (res.status === 403 || res.status === 401) {
+        toast.error("Unauthorized");
+        return;
+      }
       toast.error("Something went wrong");
     } else {
       const data = await res.json();
@@ -87,12 +93,15 @@ export default function EditWordPage({ wd }) {
 }
 
 export async function getServerSideProps({ params: { id }, req }) {
+  const { token } = parseCookies(req);
+
   const res = await fetch(`${API_URL}/words/${id}`);
   const wd = await res.json();
 
   return {
     props: {
       wd,
+      token,
     },
   };
 }
